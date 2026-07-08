@@ -473,6 +473,19 @@
         background:rgba(245,158,11,.08);
         box-shadow:0 10px 22px rgba(15,23,42,.08);
       }
+      .aov-sticky{
+        position:sticky;
+        top:62px;
+        z-index:45;
+        display:none;
+      }
+      .aov-sticky-inner{
+        border-radius:18px;
+        border:1px solid var(--line);
+        background:rgba(255,255,255,.92);
+        box-shadow:var(--shadow2);
+      }
+      .aov-sticky .aov-grid{margin-top:0}
       .switcher .aov-name{
         font-size:11px;
         line-height:1.3;
@@ -922,7 +935,7 @@
       }
       .aov{border-radius:24px;border:1px solid rgba(15,23,42,.10);box-shadow:0 10px 26px rgba(15,23,42,.08)}
       .aov-sticky-wrap{padding-top:8px;padding-bottom:8px}
-      .aov-sticky{position:sticky;top:60px;z-index:49}
+      .aov-sticky{position:sticky;top:60px;z-index:49;display:none}
       .aov-hd{padding:14px 14px 12px}
       .aov-grid{padding:10px 12px 12px;gap:8px}
       .aov-card{border-radius:14px;min-height:44px;touch-action:manipulation;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease}
@@ -1027,13 +1040,13 @@
         <div class="switcher" data-switcher="am" data-active="0">
           <div class="switch-hd">
             <div class="seg" role="tablist" aria-label="AMAX切换">
-              <div class="segbtn active" data-idx="0" role="tab" tabindex="0" aria-selected="true">关于AMAX</div>
-              <div class="segbtn" data-idx="1" role="tab" tabindex="0" aria-selected="false">AMAX活动</div>
+              <div class="segbtn active" data-idx="0" role="tab" tabindex="0" aria-selected="true">AMAX活动</div>
+              <div class="segbtn" data-idx="1" role="tab" tabindex="0" aria-selected="false">关于AMAX</div>
             </div>
           </div>
           <div class="switch-panels">
             <div class="switch-track">
-              <div class="switch-panel" data-idx="0" id="intro">
+              <div class="switch-panel" data-idx="1" id="intro">
                 <div class="card">
                   <div class="card-bd">
                     <div class="para">AMAX是Armonia公链的原生代币，Armonia是一个母子多链区块链平台，Armonia Meta Chain（AMC）是母链，连接所有其他主权Armonia子链（ACC）。AMAX作为原生代币，可用于母链及子链的运营所需资产，甚至可以成为子链的原生代币。</div>
@@ -1053,7 +1066,7 @@
                   </div>
                 </div>
               </div>
-              <div class="switch-panel" data-idx="1">
+              <div class="switch-panel" data-idx="0" id="rewards">
                 <div class="aov">
                   <div class="aov-grid">
                     <div class="aov-card active" data-anchor="#a1" role="button" tabindex="0"><div class="aov-name">每日交易奖池</div></div>
@@ -1067,6 +1080,10 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="aov-sticky" id="aovSticky">
+        <div class="aov-sticky-inner"></div>
       </div>
 
       <div class="section" id="rewards">
@@ -1459,9 +1476,12 @@
         function smoothTo(sel){
           var el = qs(sel);
           if (!el) return;
-          var topbarH = 52;
-          var tabsH = 54;
-          var y = el.getBoundingClientRect().top + window.pageYOffset - topbarH - tabsH - 10;
+          var topbar = qs(".topbar");
+          var topbarH = topbar ? topbar.getBoundingClientRect().height : 52;
+          var tabsH = tabRow ? tabRow.getBoundingClientRect().height : 54;
+          var sticky = qs("#aovSticky");
+          var stickyH = (sticky && sticky.style.display !== "none") ? sticky.getBoundingClientRect().height : 0;
+          var y = el.getBoundingClientRect().top + window.pageYOffset - topbarH - tabsH - stickyH - 10;
           window.scrollTo({ top: y, behavior: "smooth" });
         }
 
@@ -1491,9 +1511,27 @@
           var root = qs('.switcher[data-switcher="am"]');
           if (!root) return;
           var tabs = qsa(".segbtn", root);
-          var cardItems = qsa('.switch-panel[data-idx="1"] [data-anchor]', root);
+          var cardItems = qsa('.switch-panel[data-idx="0"] [data-anchor]', root);
+          var panel = qs('.switch-panel[data-idx="0"]', root);
+          var aov = panel ? qs(".aov", panel) : null;
+          var sticky = qs("#aovSticky");
+          var stickyInner = sticky ? qs(".aov-sticky-inner", sticky) : null;
           var cur = parseInt(root.getAttribute("data-active") || "0", 10);
           if (isNaN(cur)) cur = 0;
+
+          function syncSticky(active){
+            if (!sticky || !panel || !aov) return;
+            var topbar = qs(".topbar");
+            var topbarH = topbar ? topbar.getBoundingClientRect().height : 52;
+            sticky.style.top = (topbarH + 8) + "px";
+            if (active) {
+              sticky.style.display = "block";
+              if (stickyInner && aov.parentElement !== stickyInner) stickyInner.appendChild(aov);
+            } else {
+              sticky.style.display = "none";
+              if (aov.parentElement !== panel) panel.appendChild(aov);
+            }
+          }
 
           function setIdx(i){
             cur = i;
@@ -1503,10 +1541,11 @@
               if (on) t.classList.add("active"); else t.classList.remove("active");
               t.setAttribute("aria-selected", on ? "true" : "false");
             });
-            if (i === 1 && cardItems.length) {
+            if (i === 0 && cardItems.length) {
               cardItems.forEach(function(item){ item.classList.remove("active"); });
               cardItems[0].classList.add("active");
             }
+            syncSticky(i === 0);
           }
 
           tabs.forEach(function(t){
