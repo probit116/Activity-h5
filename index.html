@@ -451,6 +451,7 @@
       .switch-panel{width:100%;padding:14px;display:none}
       .switcher[data-active="0"] .switch-panel[data-idx="0"]{display:block}
       .switcher[data-active="1"] .switch-panel[data-idx="1"]{display:block}
+      .switcher[data-active="2"] .switch-panel[data-idx="2"]{display:block}
       .switch-panel .card{box-shadow:none}
       .switch-panel .h2{display:none}
       .switch-panel .aov{margin-top:0;box-shadow:none}
@@ -473,19 +474,141 @@
         background:rgba(245,158,11,.08);
         box-shadow:0 10px 22px rgba(15,23,42,.08);
       }
-      .aov-sticky{
-        position:sticky;
-        top:62px;
-        z-index:45;
+      .activity-cards{
+        display:grid;
+        gap:12px;
+      }
+      .activity-card{
+        border-radius:22px;
+        border:1px solid rgba(15,23,42,.12);
+        background:
+          radial-gradient(460px 220px at 8% 0%, rgba(245,158,11,.20) 0%, rgba(245,158,11,0) 62%),
+          radial-gradient(520px 260px at 100% 0%, rgba(37,99,235,.14) 0%, rgba(37,99,235,0) 60%),
+          linear-gradient(180deg, rgba(11,18,32,.98) 0%, rgba(6,10,20,.98) 100%);
+        box-shadow:0 18px 44px rgba(15,23,42,.18);
+        overflow:hidden;
+        cursor:pointer;
+        user-select:none;
+        transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      }
+      .activity-card:active{
+        transform:translateY(1px);
+        box-shadow:0 12px 30px rgba(15,23,42,.18);
+      }
+      .activity-card-media{
+        height:112px;
+        background:
+          radial-gradient(220px 140px at 12% 30%, rgba(251,191,36,.34) 0%, rgba(251,191,36,0) 70%),
+          radial-gradient(260px 160px at 86% 10%, rgba(14,165,233,.20) 0%, rgba(14,165,233,0) 68%),
+          rgba(255,255,255,.04);
+        border-bottom:1px solid rgba(255,255,255,.10);
+        position:relative;
+        overflow:hidden;
+      }
+      .activity-card-media::before{
+        content:"";
+        position:absolute;
+        left:18px;
+        top:22px;
+        width:92px;
+        height:58px;
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,.18);
+        background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
+        box-shadow:0 12px 28px rgba(15,23,42,.16);
+      }
+      .activity-card-media::after{
+        content:"";
+        position:absolute;
+        right:18px;
+        bottom:16px;
+        width:56px;
+        height:56px;
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,.16);
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), rgba(255,255,255,.04) 72%),
+          rgba(255,255,255,.05);
+        box-shadow:0 10px 24px rgba(15,23,42,.14);
+      }
+      .activity-card:nth-child(2) .activity-card-media{
+        background:
+          radial-gradient(220px 140px at 18% 18%, rgba(244,114,182,.22) 0%, rgba(244,114,182,0) 70%),
+          radial-gradient(260px 160px at 86% 16%, rgba(14,165,233,.18) 0%, rgba(14,165,233,0) 68%),
+          rgba(255,255,255,.04);
+      }
+      .activity-card:nth-child(3) .activity-card-media{
+        background:
+          radial-gradient(220px 140px at 14% 22%, rgba(250,204,21,.24) 0%, rgba(250,204,21,0) 70%),
+          radial-gradient(260px 160px at 88% 18%, rgba(34,197,94,.16) 0%, rgba(34,197,94,0) 68%),
+          rgba(255,255,255,.04);
+      }
+      .activity-card:nth-child(4) .activity-card-media{
+        background:
+          radial-gradient(220px 140px at 18% 26%, rgba(59,130,246,.22) 0%, rgba(59,130,246,0) 70%),
+          radial-gradient(260px 160px at 88% 18%, rgba(168,85,247,.16) 0%, rgba(168,85,247,0) 68%),
+          rgba(255,255,255,.04);
+      }
+      .activity-card:nth-child(5) .activity-card-media{
+        background:
+          radial-gradient(220px 140px at 16% 24%, rgba(45,212,191,.20) 0%, rgba(45,212,191,0) 70%),
+          radial-gradient(260px 160px at 86% 16%, rgba(251,191,36,.16) 0%, rgba(251,191,36,0) 68%),
+          rgba(255,255,255,.04);
+      }
+      .activity-card-bd{padding:12px 14px 14px}
+      .activity-card-title{
+        font-size:14px;
+        font-weight:1100;
+        color:rgba(248,250,252,.96);
+        letter-spacing:.1px;
+      }
+      .activity-card-desc{
+        margin-top:6px;
+        font-size:12px;
+        line-height:1.55;
+        color:rgba(226,232,240,.70);
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .activity-detail{
+        position:fixed;
+        inset:0;
+        z-index:90;
+        background:var(--bg);
         display:none;
       }
-      .aov-sticky-inner{
-        border-radius:18px;
-        border:1px solid var(--line);
-        background:rgba(255,255,255,.92);
-        box-shadow:var(--shadow2);
+      .activity-detail-inner{
+        max-width:420px;
+        margin:0 auto;
+        height:100%;
+        display:flex;
+        flex-direction:column;
       }
-      .aov-sticky .aov-grid{margin-top:0}
+      .activity-detail-top{
+        height:52px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:0 14px;
+        border-bottom:1px solid var(--line);
+        backdrop-filter: blur(10px);
+        background:linear-gradient(180deg, rgba(246,247,251,.92) 0%, rgba(246,247,251,.72) 100%);
+      }
+      .activity-detail-title{
+        flex:1;
+        text-align:center;
+        margin-right:36px;
+        font-weight:1000;
+        letter-spacing:.2px;
+      }
+      .activity-detail-body{
+        flex:1;
+        overflow:auto;
+        padding:14px;
+      }
+      .activity-detail-body .section{padding:0}
       .switcher .aov-name{
         font-size:11px;
         line-height:1.3;
@@ -934,8 +1057,6 @@
         background:rgba(15,23,42,.04);
       }
       .aov{border-radius:24px;border:1px solid rgba(15,23,42,.10);box-shadow:0 10px 26px rgba(15,23,42,.08)}
-      .aov-sticky-wrap{padding-top:8px;padding-bottom:8px}
-      .aov-sticky{position:sticky;top:60px;z-index:49;display:none}
       .aov-hd{padding:14px 14px 12px}
       .aov-grid{padding:10px 12px 12px;gap:8px}
       .aov-card{border-radius:14px;min-height:44px;touch-action:manipulation;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease}
@@ -1042,6 +1163,7 @@
             <div class="seg" role="tablist" aria-label="AMAX切换">
               <div class="segbtn active" data-idx="0" role="tab" tabindex="0" aria-selected="true">AMAX活动</div>
               <div class="segbtn" data-idx="1" role="tab" tabindex="0" aria-selected="false">关于AMAX</div>
+              <div class="segbtn" data-idx="2" role="tab" tabindex="0" aria-selected="false">配套区</div>
             </div>
           </div>
           <div class="switch-panels">
@@ -1067,13 +1189,72 @@
                 </div>
               </div>
               <div class="switch-panel" data-idx="0" id="rewards">
-                <div class="aov">
-                  <div class="aov-grid">
-                    <div class="aov-card active" data-anchor="#a1" role="button" tabindex="0"><div class="aov-name">每日交易奖池</div></div>
-                    <div class="aov-card" data-anchor="#a2" role="button" tabindex="0"><div class="aov-name">风险保障计划</div></div>
-                    <div class="aov-card" data-anchor="#a3" role="button" tabindex="0"><div class="aov-name">邀请瓜分 70,000 AMAX</div></div>
-                    <div class="aov-card" data-anchor="#a4" role="button" tabindex="0"><div class="aov-name">团队返佣升级计划</div></div>
-                    <div class="aov-card" data-anchor="#a5" role="button" tabindex="0"><div class="aov-name">新人专享</div></div>
+                <div class="activity-cards" id="activityCards" aria-label="活动入口">
+                  <div class="activity-card" data-activity="a1" role="button" tabindex="0">
+                    <div class="activity-card-media" aria-hidden="true"></div>
+                    <div class="activity-card-bd">
+                      <div class="activity-card-title"></div>
+                      <div class="activity-card-desc"></div>
+                    </div>
+                  </div>
+                  <div class="activity-card" data-activity="a2" role="button" tabindex="0">
+                    <div class="activity-card-media" aria-hidden="true"></div>
+                    <div class="activity-card-bd">
+                      <div class="activity-card-title"></div>
+                      <div class="activity-card-desc"></div>
+                    </div>
+                  </div>
+                  <div class="activity-card" data-activity="a3" role="button" tabindex="0">
+                    <div class="activity-card-media" aria-hidden="true"></div>
+                    <div class="activity-card-bd">
+                      <div class="activity-card-title"></div>
+                      <div class="activity-card-desc"></div>
+                    </div>
+                  </div>
+                  <div class="activity-card" data-activity="a4" role="button" tabindex="0">
+                    <div class="activity-card-media" aria-hidden="true"></div>
+                    <div class="activity-card-bd">
+                      <div class="activity-card-title"></div>
+                      <div class="activity-card-desc"></div>
+                    </div>
+                  </div>
+                  <div class="activity-card" data-activity="a5" role="button" tabindex="0">
+                    <div class="activity-card-media" aria-hidden="true"></div>
+                    <div class="activity-card-bd">
+                      <div class="activity-card-title"></div>
+                      <div class="activity-card-desc"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="switch-panel" data-idx="2" id="support">
+                <div class="card">
+                  <div class="card-hd">
+                    <div>
+                      <div class="t">AMAX/USDT 现货交易对</div>
+                      <div class="d">购买AMAX，质押提升VIP等级+瓜分每日奖池一站式搞定</div>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div class="card-bd">
+                    <div class="btnrow">
+                      <div class="btn primary" data-action="trade">立即交易</div>
+                    </div>
+                  </div>
+                </div>
+                <div style="height:12px"></div>
+                <div class="card">
+                  <div class="card-hd">
+                    <div>
+                      <div class="t">AMAX理财产品</div>
+                      <div class="d">XX AMAX起投，预期年化收益高达 XX ，坐享安心收益</div>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div class="card-bd">
+                    <div class="btnrow">
+                      <div class="btn primary" data-action="subscribe">立即申购</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1082,10 +1263,7 @@
         </div>
       </div>
 
-      <div class="aov-sticky" id="aovSticky">
-        <div class="aov-sticky-inner"></div>
-      </div>
-
+      <div id="activityDetailPool" style="display:none">
       <div class="section" id="rewards">
         <div class="activity-lead" aria-label="活动区标题">
           <div class="activity-lead-badge">AMAX活动</div>
@@ -1300,41 +1478,9 @@
           </div>
         </div>
       </div>
-
-      <div class="section" id="support">
-        <div class="h2"><div class="t">配套区</div></div>
-        <div class="card">
-          <div class="card-hd">
-            <div>
-              <div class="t">AMAX/USDT 现货交易对</div>
-              <div class="d">购买AMAX，质押提升VIP等级+瓜分每日奖池一站式搞定</div>
-            </div>
-            <div></div>
-          </div>
-          <div class="card-bd">
-            <div class="btnrow">
-              <div class="btn primary" data-action="trade">立即交易</div>
-            </div>
-          </div>
-        </div>
-        <div style="height:12px"></div>
-        <div class="card">
-          <div class="card-hd">
-            <div>
-              <div class="t">AMAX理财产品</div>
-              <div class="d">XX AMAX起投，预期年化收益高达 XX ，坐享安心收益</div>
-            </div>
-            <div></div>
-          </div>
-          <div class="card-bd">
-            <div class="btnrow">
-              <div class="btn primary" data-action="subscribe">立即申购</div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div class="section" id="benefits">
+      <div class="section" id="benefits" style="display:none">
         <div class="h2"><div class="t">持有AMAX，尊享六大专属权益</div></div>
         <div class="grid2">
           <div class="benefit">
@@ -1443,6 +1589,20 @@
       </div>
     </div>
 
+    <div class="activity-detail" id="activityDetail" aria-hidden="true">
+      <div class="activity-detail-inner">
+        <div class="activity-detail-top">
+          <div class="back" id="activityBack" aria-label="返回" role="button" tabindex="0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="color:var(--text)">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="activity-detail-title" id="activityDetailTitle"></div>
+        </div>
+        <div class="activity-detail-body" id="activityDetailBody"></div>
+      </div>
+    </div>
+
     <script>
       window.AMAX_I18N_PAGE = "h5";
     </script>
@@ -1473,65 +1633,112 @@
         tick();
         setInterval(tick, 1000);
 
-        function smoothTo(sel){
-          var el = qs(sel);
-          if (!el) return;
-          var topbar = qs(".topbar");
-          var topbarH = topbar ? topbar.getBoundingClientRect().height : 52;
-          var tabsH = tabRow ? tabRow.getBoundingClientRect().height : 54;
-          var sticky = qs("#aovSticky");
-          var stickyH = (sticky && sticky.style.display !== "none") ? sticky.getBoundingClientRect().height : 0;
-          var y = el.getBoundingClientRect().top + window.pageYOffset - topbarH - tabsH - stickyH - 10;
-          window.scrollTo({ top: y, behavior: "smooth" });
+        var pool = qs("#activityDetailPool");
+        var detail = qs("#activityDetail");
+        var detailTitle = qs("#activityDetailTitle");
+        var detailBody = qs("#activityDetailBody");
+        var activityBack = qs("#activityBack");
+        var listScrollY = 0;
+        var curActivityId = null;
+
+        function isDetailOpen(){
+          return !!(detail && detail.getAttribute("aria-hidden") === "false");
         }
 
-        var tabRow = qs("#tabRow");
-        if (tabRow) {
-          tabRow.addEventListener("click", function(e){
-            var t = e.target;
-            if (!(t instanceof Element)) return;
-            var tab = t.closest(".tab");
-            if (!tab) return;
-            var anchor = tab.getAttribute("data-anchor");
-            if (!anchor) return;
-            qsa(".tab", tabRow).forEach(function(x){ x.classList.remove("active"); });
-            tab.classList.add("active");
-            smoothTo(anchor);
+        function lockBody(){
+          listScrollY = window.pageYOffset || 0;
+          document.body.style.position = "fixed";
+          document.body.style.top = (-listScrollY) + "px";
+          document.body.style.left = "0";
+          document.body.style.right = "0";
+        }
+        function unlockBody(){
+          var y = listScrollY;
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.left = "";
+          document.body.style.right = "";
+          window.scrollTo(0, y);
+        }
+        function ensureHistoryBase(){
+          var st = history.state;
+          if (!st || !st.__amax_h5) history.replaceState({__amax_h5:1, view:"list"}, "", location.href);
+        }
+        function mountActivity(id){
+          if (!pool || !detailBody) return null;
+          var sec = qs("#" + id);
+          if (!sec) return null;
+          detailBody.innerHTML = "";
+          detailBody.appendChild(sec);
+          return sec;
+        }
+        function unmountActivity(){
+          if (!pool || !curActivityId) return;
+          var sec = qs("#" + curActivityId);
+          if (sec && sec.parentElement !== pool) pool.appendChild(sec);
+        }
+        function openActivity(id, fromPop){
+          if (!detail || !detailBody || !pool) return;
+          var sec = mountActivity(id);
+          if (!sec) return;
+          var t = qs(".card-hd .t", sec);
+          if (detailTitle) detailTitle.textContent = t ? t.textContent : "";
+          curActivityId = id;
+          detail.style.display = "block";
+          detail.setAttribute("aria-hidden", "false");
+          lockBody();
+          if (!fromPop) {
+            ensureHistoryBase();
+            history.pushState({__amax_h5:1, view:"detail", id:id}, "", location.href);
+          }
+        }
+        function closeActivity(fromPop){
+          if (!detail) return;
+          unmountActivity();
+          curActivityId = null;
+          detail.style.display = "none";
+          detail.setAttribute("aria-hidden", "true");
+          unlockBody();
+          if (!fromPop) {
+            var st = history.state;
+            if (st && st.__amax_h5 && st.view === "detail") history.back();
+          }
+        }
+        function initActivityCards(){
+          var list = qs("#activityCards");
+          if (!list || !pool) return;
+          ["a1","a2","a3","a4","a5"].forEach(function(id){
+            var card = qs('[data-activity="' + id + '"]', list);
+            var sec = qs("#" + id);
+            if (!card || !sec) return;
+            var title = qs(".activity-card-title", card);
+            var desc = qs(".activity-card-desc", card);
+            var t = qs(".card-hd .t", sec);
+            var d2 = qs(".card-hd .d", sec);
+            if (title && t) title.textContent = t.textContent;
+            if (desc && d2) desc.textContent = d2.textContent;
+            card.addEventListener("click", function(){ openActivity(id); });
           });
         }
+        initActivityCards();
 
-        qsa("[data-anchor]").forEach(function(item){
-          item.addEventListener("click", function(){
-            var a = item.getAttribute("data-anchor");
-            if (a) smoothTo(a);
-          });
+        if (activityBack) activityBack.addEventListener("click", function(){ history.back(); });
+        window.addEventListener("popstate", function(e){
+          var st = e.state;
+          if (st && st.__amax_h5 && st.view === "detail" && st.id) {
+            openActivity(st.id, true);
+            return;
+          }
+          if (isDetailOpen()) closeActivity(true);
         });
 
         function initSwitch(){
           var root = qs('.switcher[data-switcher="am"]');
           if (!root) return;
           var tabs = qsa(".segbtn", root);
-          var cardItems = qsa('.switch-panel[data-idx="0"] [data-anchor]', root);
-          var panel = qs('.switch-panel[data-idx="0"]', root);
-          var aov = panel ? qs(".aov", panel) : null;
-          var sticky = qs("#aovSticky");
-          var stickyInner = sticky ? qs(".aov-sticky-inner", sticky) : null;
+          var benefits = qs("#benefits");
           var cur = parseInt(root.getAttribute("data-active") || "0", 10);
           if (isNaN(cur)) cur = 0;
-
-          function syncSticky(active){
-            if (!sticky || !panel || !aov) return;
-            var topbar = qs(".topbar");
-            var topbarH = topbar ? topbar.getBoundingClientRect().height : 52;
-            sticky.style.top = (topbarH + 8) + "px";
-            if (active) {
-              sticky.style.display = "block";
-              if (stickyInner && aov.parentElement !== stickyInner) stickyInner.appendChild(aov);
-            } else {
-              sticky.style.display = "none";
-              if (aov.parentElement !== panel) panel.appendChild(aov);
-            }
-          }
 
           function setIdx(i){
             cur = i;
@@ -1541,11 +1748,8 @@
               if (on) t.classList.add("active"); else t.classList.remove("active");
               t.setAttribute("aria-selected", on ? "true" : "false");
             });
-            if (i === 0 && cardItems.length) {
-              cardItems.forEach(function(item){ item.classList.remove("active"); });
-              cardItems[0].classList.add("active");
-            }
-            syncSticky(i === 0);
+            if (benefits) benefits.style.display = (i === 2) ? "" : "none";
+            if (i !== 0 && isDetailOpen()) history.back();
           }
 
           tabs.forEach(function(t){
@@ -1558,13 +1762,6 @@
               if (e.key !== "Enter" && e.key !== " ") return;
               if (e.key === " ") e.preventDefault();
               t.click();
-            });
-          });
-
-          cardItems.forEach(function(item){
-            item.addEventListener("click", function(){
-              cardItems.forEach(function(x){ x.classList.remove("active"); });
-              item.classList.add("active");
             });
           });
 
@@ -1581,8 +1778,8 @@
             var dx = tt.clientX - sx;
             var dy = tt.clientY - sy;
             if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
-            if (dx < 0) setIdx(1);
-            else setIdx(0);
+            if (dx < 0) setIdx(Math.min(2, cur + 1));
+            else setIdx(Math.max(0, cur - 1));
           });
 
           setIdx(cur);
@@ -1635,8 +1832,8 @@
           var btn = t.closest('[role="button"]');
           if (!btn) return;
           if (e.key === " ") e.preventDefault();
-          if (btn.id === "backBtn") { btn.click(); return; }
-          if (btn.hasAttribute("data-anchor") || btn.hasAttribute("data-action")) { btn.click(); return; }
+          if (btn.id === "backBtn" || btn.id === "activityBack") { btn.click(); return; }
+          if (btn.hasAttribute("data-activity") || btn.hasAttribute("data-action")) { btn.click(); return; }
         });
 
         function copyText(text){
