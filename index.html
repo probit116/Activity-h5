@@ -133,6 +133,13 @@
         border:1px solid rgba(255,255,255,.16);
         display:grid;place-items:center;
       }
+      .logo-text{
+        font-size:12px;
+        font-weight:1100;
+        letter-spacing:.14em;
+        line-height:1;
+        color:rgba(248,250,252,.92);
+      }
       .hero-title{margin-top:22px}
       .hero-title .t1{
         font-size:14px;
@@ -614,6 +621,33 @@
         font-size:12px;
         line-height:1.55;
       }
+      .dual-switch{margin-top:10px}
+      .dual-tabs{
+        display:flex;
+        gap:8px;
+        padding:5px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background:rgba(15,23,42,.03);
+      }
+      .dual-tab{
+        flex:1;
+        text-align:center;
+        padding:9px 10px;
+        border-radius:999px;
+        font-weight:1000;
+        font-size:12px;
+        color:var(--muted);
+        user-select:none;
+      }
+      .dual-tab.active{
+        background:rgba(245,158,11,.12);
+        border:1px solid rgba(245,158,11,.28);
+        color:#92400e;
+      }
+      .dual-panels{margin-top:10px}
+      .dual-panel{display:none}
+      .dual-panel.active{display:block}
       .btnrow{display:flex;gap:10px;margin-top:12px}
       .btn{
         flex:1;height:44px;
@@ -955,11 +989,7 @@
           <div class="hero-inner">
             <div class="brand">
               <div class="logo" aria-hidden="true">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2.5c5.247 0 9.5 4.253 9.5 9.5S17.247 21.5 12 21.5 2.5 17.247 2.5 12 6.753 2.5 12 2.5z" stroke="rgba(240,213,154,.95)" stroke-width="1.2"/>
-                  <path d="M7.2 14.7l3.2-6.5h3.2l3.2 6.5" stroke="rgba(240,213,154,.95)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M9.3 12h5.4" stroke="rgba(240,213,154,.95)" stroke-width="1.9" stroke-linecap="round"/>
-                </svg>
+                <div class="logo-text">COINQ</div>
               </div>
             </div>
 
@@ -1041,7 +1071,6 @@
       <div class="section" id="rewards">
         <div class="activity-lead" aria-label="活动区标题">
           <div class="activity-lead-badge">AMAX活动</div>
-          <div class="activity-lead-title">活动区</div>
           <div class="activity-lead-line" aria-hidden="true"></div>
         </div>
       </div>
@@ -1056,26 +1085,53 @@
             <div></div>
           </div>
           <div class="card-bd">
-            <table class="table" aria-label="VIP规则">
-              <thead>
-                <tr>
-                  <th>VIP</th><th>有效净买入</th><th>最低成交额</th><th>权重</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>LV1</td><td>≥100</td><td>≥10,000</td><td>5</td></tr>
-                <tr><td>LV2</td><td>≥200</td><td>≥20,000</td><td>6</td></tr>
-                <tr><td>LV3</td><td>≥300</td><td>≥30,000</td><td>7</td></tr>
-                <tr><td>LV4</td><td>≥600</td><td>≥60,000</td><td>8</td></tr>
-                <tr><td>LV5</td><td>≥2,000</td><td>≥200,000</td><td>9</td></tr>
-                <tr><td>LV6</td><td>≥4,000</td><td>≥400,000</td><td>10</td></tr>
-                <tr><td>LV7</td><td>≥10,000</td><td>≥1,000,000</td><td>12</td></tr>
-                <tr><td>LV8</td><td>≥20,000</td><td>≥2,000,000</td><td>15</td></tr>
-              </tbody>
-            </table>
-            <div class="callout">
-              <div>每日活动积分 = 当日成交额 * 权重系数</div>
-              <div>用户奖励 = 每日奖励池 * (用户当日活动积分 / 全平台当日总活动积分)</div>
+            <div class="dual-switch" data-switcher="daily-board" data-active="0">
+              <div class="dual-tabs" role="tablist" aria-label="榜单与规则切换">
+                <div class="dual-tab active" data-idx="0" role="tab" tabindex="0" aria-selected="true">今日AMAX交易榜</div>
+                <div class="dual-tab" data-idx="1" role="tab" tabindex="0" aria-selected="false">规则解释</div>
+              </div>
+              <div class="dual-panels">
+                <div class="dual-panel active" data-idx="0">
+                  <table class="table" aria-label="今日AMAX交易榜">
+                    <thead><tr><th style="width:56px">排名</th><th>UID</th><th>注册手机/邮箱</th><th style="text-align:right;width:110px">成交额</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>97*****8</td><td>1865****31</td><td style="text-align:right">2,850,000</td></tr>
+                      <tr><td>2</td><td>97*****4</td><td>1726****88</td><td style="text-align:right">2,100,000</td></tr>
+                      <tr><td>3</td><td>97*****7</td><td><a class="link" href="javascript:void(0)">1**@qq.com</a></td><td style="text-align:right">1,850,000</td></tr>
+                      <tr><td>4</td><td>97*****0</td><td><a class="link" href="javascript:void(0)">3**@gmail.com</a></td><td style="text-align:right">820,000</td></tr>
+                      <tr><td>5</td><td>97*****9</td><td><a class="link" href="javascript:void(0)">t**@gmail.com</a></td><td style="text-align:right">600,000</td></tr>
+                      <tr><td>6</td><td>97*****2</td><td>1397****54</td><td style="text-align:right">520,000</td></tr>
+                      <tr><td>7</td><td>97*****5</td><td><a class="link" href="javascript:void(0)">a**@outlook.com</a></td><td style="text-align:right">468,000</td></tr>
+                      <tr><td>8</td><td>97*****8</td><td>1572****09</td><td style="text-align:right">395,000</td></tr>
+                      <tr><td>9</td><td>97*****6</td><td><a class="link" href="javascript:void(0)">m**@hotmail.com</a></td><td style="text-align:right">318,000</td></tr>
+                      <tr><td>10</td><td>97*****3</td><td>1883****67</td><td style="text-align:right">256,000</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="dual-panel" data-idx="1">
+                  <table class="table" aria-label="VIP规则">
+                    <thead>
+                      <tr>
+                        <th>VIP</th><th>有效净买入</th><th>最低成交额</th><th>权重</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>LV1</td><td>≥100</td><td>≥10,000</td><td>5</td></tr>
+                      <tr><td>LV2</td><td>≥200</td><td>≥20,000</td><td>6</td></tr>
+                      <tr><td>LV3</td><td>≥300</td><td>≥30,000</td><td>7</td></tr>
+                      <tr><td>LV4</td><td>≥600</td><td>≥60,000</td><td>8</td></tr>
+                      <tr><td>LV5</td><td>≥2,000</td><td>≥200,000</td><td>9</td></tr>
+                      <tr><td>LV6</td><td>≥4,000</td><td>≥400,000</td><td>10</td></tr>
+                      <tr><td>LV7</td><td>≥10,000</td><td>≥1,000,000</td><td>12</td></tr>
+                      <tr><td>LV8</td><td>≥20,000</td><td>≥2,000,000</td><td>15</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="callout">
+                    <div>每日活动积分 = 当日成交额 * 权重系数</div>
+                    <div>用户奖励 = 每日奖励池 * (用户当日活动积分 / 全平台当日总活动积分)</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="btnrow">
               <div class="btn ghost" data-action="vip">升级VIP</div>
@@ -1103,26 +1159,26 @@
             <div></div>
           </div>
           <div class="card-bd">
-            <div style="font-weight:1000">今日AMAX交易榜</div>
-            <table class="table" aria-label="榜单占位" style="margin-top:10px">
-              <thead><tr><th style="width:56px">排名</th><th>UID</th><th>注册手机/邮箱</th><th style="text-align:right;width:110px">成交额</th></tr></thead>
-              <tbody>
-                <tr><td>1</td><td>97*****8</td><td>1865****31</td><td style="text-align:right">2,850,000</td></tr>
-                <tr><td>2</td><td>97*****4</td><td>1726****88</td><td style="text-align:right">2,100,000</td></tr>
-                <tr><td>3</td><td>97*****7</td><td><a class="link" href="javascript:void(0)">1**@qq.com</a></td><td style="text-align:right">1,850,000</td></tr>
-                <tr><td>4</td><td>97*****0</td><td><a class="link" href="javascript:void(0)">3**@gmail.com</a></td><td style="text-align:right">820,000</td></tr>
-                <tr><td>5</td><td>97*****9</td><td><a class="link" href="javascript:void(0)">t**@gmail.com</a></td><td style="text-align:right">600,000</td></tr>
-                <tr><td>6</td><td>97*****2</td><td>1397****54</td><td style="text-align:right">520,000</td></tr>
-                <tr><td>7</td><td>97*****5</td><td><a class="link" href="javascript:void(0)">a**@outlook.com</a></td><td style="text-align:right">468,000</td></tr>
-                <tr><td>8</td><td>97*****8</td><td>1572****09</td><td style="text-align:right">395,000</td></tr>
-                <tr><td>9</td><td>97*****6</td><td><a class="link" href="javascript:void(0)">m**@hotmail.com</a></td><td style="text-align:right">318,000</td></tr>
-                <tr><td>10</td><td>97*****3</td><td>1883****67</td><td style="text-align:right">256,000</td></tr>
-              </tbody>
-            </table>
             <div class="callout">
               <div>已实现亏损 = (平均持仓成本 - 卖出均价) * 卖出数量</div>
               <div>补贴AMAX数量 = 已实现亏损 * VIP补贴比例 / AMAX当日TWAP均价</div>
             </div>
+            <div style="height:10px"></div>
+            <div style="font-weight:1000">补贴比例与上限</div>
+            <div class="muted2" style="margin-top:6px">按用户当日达成的最高VIP等级计算</div>
+            <table class="table" aria-label="补贴比例与上限" style="margin-top:10px">
+              <thead><tr><th style="width:70px">VIP</th><th style="width:110px">补贴比例</th><th style="text-align:right">单日上限(AMAX)</th></tr></thead>
+              <tbody>
+                <tr><td>LV1</td><td>30%</td><td style="text-align:right">200</td></tr>
+                <tr><td>LV2</td><td>40%</td><td style="text-align:right">400</td></tr>
+                <tr><td>LV3</td><td>50%</td><td style="text-align:right">600</td></tr>
+                <tr><td>LV4</td><td>60%</td><td style="text-align:right">1,200</td></tr>
+                <tr><td>LV5</td><td>70%</td><td style="text-align:right">4,000</td></tr>
+                <tr><td>LV6</td><td>80%</td><td style="text-align:right">8,000</td></tr>
+                <tr><td>LV7</td><td>90%</td><td style="text-align:right">20,000</td></tr>
+                <tr><td>LV8</td><td>100%</td><td style="text-align:right">40,000</td></tr>
+              </tbody>
+            </table>
             <div class="btnrow">
               <div class="btn ghost" data-action="vip">升级VIP</div>
               <div class="btn ghost" data-action="rules">了解详细活动规则</div>
@@ -1489,6 +1545,45 @@
           setIdx(cur);
         }
         initSwitch();
+
+        function initDual(){
+          qsa(".dual-switch").forEach(function(root){
+            var tabs = qsa(".dual-tab", root);
+            var panels = qsa(".dual-panel", root);
+            var cur = parseInt(root.getAttribute("data-active") || "0", 10);
+            if (isNaN(cur)) cur = 0;
+
+            function setIdx(i){
+              cur = i;
+              root.setAttribute("data-active", String(i));
+              tabs.forEach(function(t){
+                var on = t.getAttribute("data-idx") === String(i);
+                if (on) t.classList.add("active"); else t.classList.remove("active");
+                t.setAttribute("aria-selected", on ? "true" : "false");
+              });
+              panels.forEach(function(p){
+                var on = p.getAttribute("data-idx") === String(i);
+                if (on) p.classList.add("active"); else p.classList.remove("active");
+              });
+            }
+
+            tabs.forEach(function(t){
+              t.addEventListener("click", function(){
+                var i = parseInt(t.getAttribute("data-idx") || "0", 10);
+                if (isNaN(i)) i = 0;
+                setIdx(i);
+              });
+              t.addEventListener("keydown", function(e){
+                if (e.key !== "Enter" && e.key !== " ") return;
+                if (e.key === " ") e.preventDefault();
+                t.click();
+              });
+            });
+
+            setIdx(cur);
+          });
+        }
+        initDual();
 
         document.addEventListener("keydown", function(e){
           if (e.key !== "Enter" && e.key !== " ") return;
