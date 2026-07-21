@@ -1606,7 +1606,324 @@
     <script>
       window.AMAX_I18N_PAGE = "h5";
     </script>
-    <script src="./amax-i18n.js"></script>
+    <script>
+      (function () {
+        var page = window.AMAX_I18N_PAGE || "web";
+        var STORAGE_KEY = "amax-i18n-lang-" + page;
+        var DEFAULT_LANG = "zh-CN";
+        var LANGS = [
+          { code: "zh-CN", short: "简", label: "简体中文" },
+          { code: "zh-TW", short: "繁", label: "繁體中文" },
+          { code: "en", short: "EN", label: "English" },
+          { code: "ko", short: "한", label: "한국어" }
+        ];
+
+        var TEXT = {
+          "zh-TW": {
+            "AMAX专区 - Web": "AMAX專區 - Web",
+            "AMAX专区 - H5": "AMAX專區 - H5",
+            "AMAX专区": "AMAX專區",
+            "CoinQ × AMAX 超级激励季": "CoinQ × AMAX 超級激勵季",
+            "，400万现金奖励大放送": "，400萬現金獎勵大放送",
+            "400万": "400萬",
+            "现金奖励大放送": "現金獎勵大放送",
+            "AMAX —— 新一代公链领军者，以去中心化架构打造安全可靠的公链基础设施": "AMAX —— 新一代公鏈領軍者，以去中心化架構打造安全可靠的公鏈基礎設施",
+            "下载App": "下載App",
+            "分享活动": "分享活動",
+            "行情": "行情",
+            "现货": "現貨",
+            "合约": "合約",
+            "邀请返佣": "邀請返傭",
+            "积分中心": "積分中心",
+            "合伙人管理": "合夥人管理",
+            "账户": "帳戶",
+            "订单": "訂單",
+            "随时随地快速开启交易！": "隨時隨地快速開啟交易！",
+            "与好友一起分享奖励！": "與好友一起分享獎勵！",
+            "每日奖池": "每日獎池",
+            "风险保障": "風險保障",
+            "邀请空投": "邀請空投",
+            "团队返佣": "團隊返傭",
+            "配套": "配套",
+            "权益": "權益",
+            "倒计时": "倒計時",
+            "距AMAX正式登录CoinQ还剩": "距AMAX正式登錄CoinQ還剩",
+            "天": "天",
+            "时": "時",
+            "分": "分",
+            "秒": "秒",
+            "每两小时更新一次": "每兩小時更新一次",
+            "AMAX充值开放": "AMAX 充值開放",
+            "AMAX提现开放": "AMAX 提現開放",
+            "AMAX/USDT交易开放": "AMAX/USDT 交易開放",
+            "AMAX/USDT 交易": "AMAX/USDT 交易",
+            "AMAX质押理财开放": "AMAX 質押理財開放",
+            "AMAX质押理财": "AMAX 質押理財",
+            "（待补充）": "（待補充）",
+            "关于AMAX": "關於AMAX",
+            "AMAX活动": "AMAX活動",
+            "AMAX是Armonia公链的原生代币，Armonia是一个母子多链区块链平台，Armonia Meta Chain（AMC）是母链，连接所有其他主权Armonia子链（ACC）。AMAX作为原生代币，可用于母链及子链的运营所需资产，甚至可以成为子链的原生代币。": "AMAX是Armonia公鏈的原生代幣，Armonia是一個母子多鏈區塊鏈平台，Armonia Meta Chain（AMC）是母鏈，連接所有其他主權Armonia子鏈（ACC）。AMAX作為原生代幣，可用於母鏈及子鏈的運營所需資產，甚至可以成為子鏈的原生代幣。",
+            "AMAX是Armonia公链的原生代币，Armonia是一个母子多链区块链平台，Armonia Meta Chain（AMC）是母链，连接所有其他主权Armonia子链（ACC）。AMAX作为原生代币，可用于母链 及子链的运营所需资产，甚至可以成为子链的原生代币。": "AMAX是Armonia公鏈的原生代幣，Armonia是一個母子多鏈區塊鏈平台，Armonia Meta Chain（AMC）是母鏈，連接所有其他主權Armonia子鏈（ACC）。AMAX作為原生代幣，可用於母鏈及子鏈的運營所需資產，甚至可以成為子鏈的原生代幣。",
+            "项目亮点": "項目亮點",
+            "技术领先：以去中心化架构打造安全可靠的公链基础设施": "技術領先：以去中心化架構打造安全可靠的公鏈基礎設施",
+            "生态完善：深度赋能金融、游戏、资产、社区等多重场景": "生態完善：深度賦能金融、遊戲、資產、社群等多重場景",
+            "多链架构：母子多链设计，母链与子链并行互动，实现高度可扩展性": "多鏈架構：母子多鏈設計，母鏈與子鏈並行互動，實現高度可擴展性",
+            "价值闭环：构建“技术-应用-价值”的良性循环生态": "價值閉環：構建「技術-應用-價值」的良性循環生態",
+            "代币名称": "代幣名稱",
+            "符号": "符號",
+            "总供应量": "總供應量",
+            "1,000,000,000 AMAX（10亿枚）": "1,000,000,000 AMAX（10億枚）",
+            "每日交易奖池": "每日交易獎池",
+            "风险保障计划": "風險保障計劃",
+            "邀请瓜分 70,000 AMAX": "邀請瓜分 70,000 AMAX",
+            "邀请瓜分 7万AMAX": "邀請瓜分 7萬AMAX",
+            "团队返佣升级计划": "團隊返傭升級計劃",
+            "新人专享": "新人專享",
+            "每日设立 20,000 AMAX 奖励池，按积分贡献占比分配。": "每日設立 20,000 AMAX 獎勵池，按積分貢獻占比分配。",
+            "排名": "排名",
+            "注册手机/邮箱": "註冊手機/郵箱",
+            "成交额": "成交額",
+            "有效净买入": "有效淨買入",
+            "最低成交额": "最低成交額",
+            "最低成交额(USDT)": "最低成交額(USDT)",
+            "有效净买入(AMAX)": "有效淨買入(AMAX)",
+            "权重": "權重",
+            "每日活动积分 = 当日成交额 * 权重系数": "每日活動積分 = 當日成交額 * 權重係數",
+            "用户奖励 = 每日奖励池 * (用户当日活动积分 / 全平台当日总活动积分)": "用戶獎勵 = 每日獎勵池 * (用戶當日活動積分 / 全平台當日總活動積分)",
+            "升级VIP": "升級VIP",
+            "立即交易": "立即交易",
+            "了解详细活动规则": "了解詳細活動規則",
+            "活动说明": "活動說明",
+            "未完成当前VIP等级要求时，将按照已达成的最高等级参与奖励计算": "未完成當前VIP等級要求時，將按照已達成的最高等級參與獎勵計算",
+            "奖励每日统计并发放": "獎勵每日統計並發放",
+            "平台将严格监控异常交易行为，有权取消奖励资格": "平台將嚴格監控異常交易行為，有權取消獎勵資格",
+            "对 AMAX/USDT 已实现亏损，按VIP补贴比例给予 AMAX 补贴。": "對 AMAX/USDT 已實現虧損，按VIP補貼比例給予 AMAX 補貼。",
+            "对 AMAX/USDT 交易对的已实现亏损，按VIP补贴比例给予 AMAX 补贴。": "對 AMAX/USDT 交易對的已實現虧損，按VIP補貼比例給予 AMAX 補貼。",
+            "今日AMAX交易榜": "今日AMAX交易榜",
+            "已实现亏损 = (平均持仓成本 - 卖出均价) * 卖出数量": "已實現虧損 = (平均持倉成本 - 賣出均價) * 賣出數量",
+            "补贴AMAX数量 = 已实现亏损 * VIP补贴比例 / AMAX当日TWAP均价": "補貼AMAX數量 = 已實現虧損 * VIP補貼比例 / AMAX當日TWAP均價",
+            "仅统计AMAX/USDT交易对产生的已实现亏损；浮动亏损不参与补贴": "僅統計AMAX/USDT交易對產生的已實現虧損；浮動虧損不參與補貼",
+            "仅统计AMAX/USDT交易对产生的已实现亏损；浮动亏损不参与补贴计算": "僅統計AMAX/USDT交易對產生的已實現虧損；浮動虧損不參與補貼計算",
+            "补贴每日结算并发放至用户质押账户；补贴资产不计入有效净买入统计": "補貼每日結算並發放至用戶質押帳戶；補貼資產不計入有效淨買入統計",
+            "成功邀请有效用户达到对应人数，获得对应等级 AMAX 空投奖励。": "成功邀請有效用戶達到對應人數，獲得對應等級 AMAX 空投獎勵。",
+            "邀请有效用户达标即可获得对应等级AMAX空投奖励。": "邀請有效用戶達標即可獲得對應等級AMAX空投獎勵。",
+            "有效邀请人数": "有效邀請人數",
+            "奖励": "獎勵",
+            "100个AMAX空投": "100個AMAX空投",
+            "400个AMAX空投": "400個AMAX空投",
+            "800个AMAX空投": "800個AMAX空投",
+            "1500个AMAX空投": "1500個AMAX空投",
+            "立即邀请": "立即邀請",
+            "达成对应邀请人数即可获得对应等级奖励；按最高等级发放，不重复累计": "達成對應邀請人數即可獲得對應等級獎勵；按最高等級發放，不重複累計",
+            "达成对应邀请人数即可获得对应等级奖励；奖励按最高等级发放，不重复累计": "達成對應邀請人數即可获得對應等級獎勵；獎勵按最高等級發放，不重複累計",
+            "奖励数量有限，先到先得": "獎勵數量有限，先到先得",
+            "团队满足有效用户数量及团队净入金要求，可享受更高等级返佣比例。": "團隊滿足有效用戶數量及團隊淨入金要求，可享受更高等級返傭比例。",
+            "团队满足有效用户数量及团队净入金要求，享更高等级交易手续费返佣比例。": "團隊滿足有效用戶數量及團隊淨入金要求，享更高等級交易手續費返傭比例。",
+            "团队净入金": "團隊淨入金",
+            "返佣比例": "返傭比例",
+            "达成人数及净入金要求后自动升级返佣等级": "達成人數及淨入金要求後自動升級返傭等級",
+            "达成对应邀请人数及团队净入金要求后自动升级返佣等级": "達成對應邀請人數及團隊淨入金要求後自動升級返傭等級",
+            "返佣升级将在活动结束后7个工作日内完成开通": "返傭升級將在活動結束後7個工作日內完成開通",
+            "返佣对象为邀请人名下所有有效邀请用户产生的交易手续费": "返傭對象為邀請人名下所有有效邀請用戶產生的交易手續費",
+            "通过邀请链接完成注册的新用户，可参与瓜分总价值 30,000 AMAX 奖池。": "通過邀請連結完成註冊的新用戶，可參與瓜分總價值 30,000 AMAX 獎池。",
+            "需完成以下基础任务才能参与奖池瓜分：": "需完成以下基礎任務才能參與獎池瓜分：",
+            "累计净入金 ≥ 50 USDT": "累計淨入金 ≥ 50 USDT",
+            "累计现货或合约交易量 ≥ 200 USDT": "累計現貨或合約交易量 ≥ 200 USDT",
+            "立即注册": "立即註冊",
+            "配套区": "配套區",
+            "AMAX/USDT 现货交易对": "AMAX/USDT 現貨交易對",
+            "购买AMAX，质押提升VIP等级+瓜分每日奖池一站式搞定": "購買AMAX，質押提升VIP等級+瓜分每日獎池一站式搞定",
+            "AMAX理财产品": "AMAX 理財產品",
+            "XX AMAX起投，预期年化收益高达 XX ，坐享安心收益": "XX AMAX起投，預期年化收益高達 XX，坐享安心收益",
+            "立即申购": "立即申購",
+            "活动区": "活動區",
+            "持有AMAX，尊享六大专属权益": "持有AMAX，尊享六大專屬權益",
+            "VIP等级升级": "VIP等級升級",
+            "根据AMAX质押量升级CoinQ VIP等级，享更低手续费": "根據AMAX質押量升級CoinQ VIP等級，享更低手續費",
+            "手续费回购销毁": "手續費回購銷毀",
+            "平台手续费回购AMAX进行销毁，通缩升值": "平台手續費回購AMAX進行銷毀，通縮升值",
+            "Launchpad优先认购": "Launchpad優先認購",
+            "AMAX持币者享受Launchpad优先认购权": "AMAX持幣者享受Launchpad優先認購權",
+            "AI策略工具解锁": "AI策略工具解鎖",
+            "解锁专属AI策略工具与高级交易能力": "解鎖專屬AI策略工具與高級交易能力",
+            "生态节点建设": "生態節點建設",
+            "参与AMAX生态节点建设，共享生态发展收益": "參與AMAX生態節點建設，共享生態發展收益",
+            "平台治理投票": "平台治理投票",
+            "未来AMAX持有者可参与平台重大提案投票及生态治理": "未來AMAX持有者可參與平台重大提案投票及生態治理"
+          },
+          "en": {},
+          "ko": {},
+          "zh-CN": {}
+        };
+
+        var TITLE_MAP = {
+          web: {
+            "zh-CN": "AMAX专区 - Web",
+            "zh-TW": "AMAX專區 - Web",
+            en: "AMAX Zone - Web",
+            ko: "AMAX 존 - Web"
+          },
+          h5: {
+            "zh-CN": "AMAX专区 - H5",
+            "zh-TW": "AMAX專區 - H5",
+            en: "AMAX Zone - H5",
+            ko: "AMAX 존 - H5"
+          }
+        };
+
+        function normalize(s) {
+          return String(s || "")
+            .replace(/\s+/g, " ")
+            .replace(/[\u00A0]/g, " ")
+            .trim();
+        }
+
+        function safeGetItem(key) {
+          try {
+            return window.localStorage.getItem(key);
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function safeSetItem(key, val) {
+          try {
+            window.localStorage.setItem(key, val);
+          } catch (e) {}
+        }
+
+        function translateText(original, lang) {
+          var t = normalize(original);
+          var map = TEXT[lang];
+          if (!map) return original;
+          if (map[t]) return original.replace(t, map[t]);
+          return original;
+        }
+
+        function translateAlert(message, lang) {
+          return translateText(message, lang);
+        }
+
+        var originalAlert = window.alert;
+        var currentLang = safeGetItem(STORAGE_KEY) || DEFAULT_LANG;
+        window.alert = function (message) {
+          originalAlert.call(window, translateAlert(String(message), currentLang));
+        };
+
+        var textNodes = [];
+        var originalTexts = new WeakMap();
+
+        function collectTextNodes() {
+          if (!document.body) return;
+          var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+            acceptNode: function (node) {
+              var parent = node.parentElement;
+              if (!parent) return NodeFilter.FILTER_REJECT;
+              var tag = parent.tagName;
+              if (tag === "SCRIPT" || tag === "STYLE" || tag === "SVG" || tag === "PATH") return NodeFilter.FILTER_REJECT;
+              if (!normalize(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          });
+          var node;
+          while ((node = walker.nextNode())) {
+            textNodes.push(node);
+            originalTexts.set(node, node.nodeValue);
+          }
+        }
+
+        function injectStyles() {
+          var style = document.createElement("style");
+          style.id = "amax-i18n-style";
+          style.textContent = [
+            ".amax-lang-switch{position:relative;display:flex;align-items:center;z-index:120}",
+            ".amax-lang-trigger{height:40px;min-width:52px;padding:0 12px;border-radius:14px;border:1px solid rgba(15,23,42,.14);background:rgba(255,255,255,.94);color:#0b1220;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 10px 22px rgba(15,23,42,.08)}",
+            ".amax-lang-trigger svg{width:12px;height:12px;transition:transform .16s ease}",
+            ".amax-lang-switch.open .amax-lang-trigger svg{transform:rotate(180deg)}",
+            ".amax-lang-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:132px;padding:6px;border-radius:14px;border:1px solid rgba(15,23,42,.12);background:rgba(255,255,255,.98);box-shadow:0 18px 42px rgba(15,23,42,.14);display:none}",
+            ".amax-lang-switch.open .amax-lang-menu{display:block}",
+            ".amax-lang-option{height:36px;padding:0 10px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:800;color:#0b1220;cursor:pointer;white-space:nowrap}",
+            ".amax-lang-option.active{background:rgba(245,158,11,.12);color:#92400e}",
+            ".amax-lang-option:hover{background:rgba(15,23,42,.05)}",
+            "[data-amax-page='h5'] .topbar-inner{position:relative}",
+            "[data-amax-page='h5'] .amax-lang-switch{position:absolute;right:14px;top:50%;transform:translateY(-50%)}",
+            "[data-amax-page='h5'] .title{margin-right:0;padding:0 52px 0 8px}"
+          ].join("");
+          document.head.appendChild(style);
+        }
+
+        function mountLangSwitch() {
+          var host = document.querySelector(".lang-switch-host");
+          if (!host) return;
+          var wrap = document.createElement("div");
+          wrap.className = "amax-lang-switch";
+          wrap.innerHTML = [
+            '<button class="amax-lang-trigger" type="button" aria-label="Language">',
+            '<span class="amax-lang-current"></span>',
+            '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "</button>",
+            '<div class="amax-lang-menu"></div>'
+          ].join("");
+          host.appendChild(wrap);
+
+          var menu = wrap.querySelector(".amax-lang-menu");
+          LANGS.forEach(function (item) {
+            var option = document.createElement("div");
+            option.className = "amax-lang-option";
+            option.setAttribute("data-lang", item.code);
+            option.innerHTML = '<span>' + item.label + "</span><span>" + item.short + "</span>";
+            option.addEventListener("click", function () {
+              setLang(item.code);
+              wrap.classList.remove("open");
+            });
+            menu.appendChild(option);
+          });
+
+          wrap.querySelector(".amax-lang-trigger").addEventListener("click", function () {
+            wrap.classList.toggle("open");
+          });
+
+          document.addEventListener("click", function (event) {
+            if (!wrap.contains(event.target)) wrap.classList.remove("open");
+          });
+        }
+
+        function updateLangUI(lang) {
+          var current = document.querySelector(".amax-lang-current");
+          if (current) {
+            var item = LANGS.find(function (x) { return x.code === lang; });
+            current.textContent = item ? item.short : "简";
+          }
+          document.querySelectorAll(".amax-lang-option").forEach(function (node) {
+            node.classList.toggle("active", node.getAttribute("data-lang") === lang);
+          });
+        }
+
+        function setLang(lang) {
+          applyLang(lang);
+        }
+
+        function applyLang(lang) {
+          currentLang = lang;
+          safeSetItem(STORAGE_KEY, lang);
+          document.documentElement.lang = lang;
+          document.documentElement.setAttribute("data-lang", lang);
+          document.documentElement.setAttribute("data-amax-page", page);
+          document.title = (TITLE_MAP[page] && TITLE_MAP[page][lang]) || document.title;
+          textNodes.forEach(function (node) {
+            var original = originalTexts.get(node);
+            if (!original) return;
+            node.nodeValue = lang === DEFAULT_LANG ? original : translateText(original, lang);
+          });
+          updateLangUI(lang);
+        }
+
+        injectStyles();
+        collectTextNodes();
+        mountLangSwitch();
+        applyLang(currentLang);
+      })();
+    </script>
     <script>
       (function () {
         function qs(s, el){ return (el||document).querySelector(s); }
