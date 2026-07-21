@@ -2109,7 +2109,7 @@
       </div>
       </div>
 
-      <div class="section" id="benefits" style="display:none">
+      <div class="section" id="benefits">
         <div class="h2"><div class="t">持有AMAX，尊享六大专属权益</div></div>
         <div class="grid2">
           <div class="benefit">
@@ -2380,7 +2380,7 @@
               if (on) t.classList.add("active"); else t.classList.remove("active");
               t.setAttribute("aria-selected", on ? "true" : "false");
             });
-            if (benefits) benefits.style.display = (i === 2) ? "" : "none";
+            if (benefits) benefits.style.display = "";
             if (i !== 0 && isDetailOpen()) history.back();
           }
 
